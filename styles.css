@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #800080 0%, #FFA500 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.game-status {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(245, 245, 245, 0.8);
+    border-radius: 15px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cell:hover:empty {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cell.x {
+    color: #FFA500;
+    animation: placeSymbol 0.3s ease-out;
+}
+
+.cell.o {
+    color: #800080;
+    animation: placeSymbol 0.3s ease-out;
+}
+
+.cell.x::before {
+    content: 'X';
+    animation: fadeIn 0.3s ease-out;
+}
+
+.cell.o::before {
+    content: 'O';
+    animation: fadeIn 0.3s ease-out;
+}
+
+.cell.winning {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(128, 0, 128, 0.2));
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.game-controls {
+    margin-top: 1rem;
+}
+
+.restart-btn {
+    background: #FFA500;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+}
+
+.restart-btn:hover {
+    background: #800080;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(128, 0, 128, 0.4);
+}
+
+.restart-btn:active {
+    transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes placeSymbol {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .game-container {
+        padding: 2rem;
+    }
+    
+    .game-status {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+    
+    .cell {
+        font-size: 2.5rem;
+    }
+    
+    .restart-btn {
+        font-size: 1.1rem;
+        padding: 0.9rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.75rem;
+    }
+    
+    .game-container {
+        padding: 1.5rem;
+    }
+    
+    .game-status {
+        font-size: 1.1rem;
+        padding: 0.7rem;
+    }
+    
+    .cell {
+        font-size: 2rem;
+        border-radius: 10px;
+    }
+    
+    .game-board {
+        gap: 8px;
+        padding: 15px;
+    }
+    
+    .restart-btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.8rem;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.5rem;
+    }
+    
+    .game-container {
+        padding: 1rem;
+    }
+    
+    .cell {
+        font-size: 1.8rem;
+    }
+    
+    .restart-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.5rem;
+    }
+}
